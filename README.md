@@ -10,6 +10,24 @@ The load should only be about 10 seconds per week, well under many free tier lim
 Worst case, the user has to host the bot on their machine and leave it running
 but that's wasteful.
 
+- **MAYBE**: begin.com has scheduled functions and does not need a cc. However,
+  they do not let you pick a time. I need it to run once a week around 11AM EST on
+Thursday.
+
+> Limits
+> 
+> In the Begin free-tier, scheduled functions are limited in the following ways:
+> 
+>     They can run no more frequently than once every 6 hours
+>     30 seconds of execution time
+> 
+> Begin paid-tier apps are not limited in these ways.
+> 
+> Another important thing to note: AWS does not guarantee the exact time of
+> execution. So while you can request a scheduled function runs twice daily, you
+> cannot specify that it run at noon and midnight – it may always run at 2:04 PM &
+> 2:04 AM, for example.
+
 - **MAYBE**: PythonAnywhere looks like it has scheduled tasks that you can run
   at most once per day on free tier. However, it is limited to running once per
   day.
