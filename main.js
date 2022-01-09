@@ -6,7 +6,7 @@ require('dotenv').config();
 
 function usage() {
   console.log('node main.js help|h');
-  console.log('             channels|c <server>');
+  console.log('             channels|c [server]');
   console.log('             message|msg|m <channel> <msg>');
 }
 
@@ -30,16 +30,6 @@ if (command !== 'servers'
   && command !== 'message'
   && command !== 'msg'
   && command !== 'm'
-) {
-  usage();
-  return -1;
-}
-if (
-  (
-    command === 'channels'
-    || command === 'c'
-  )
-  && process.argv.length < 4
 ) {
   usage();
   return -1;
@@ -76,6 +66,12 @@ client.on('ready', () => {
       }
     });
   } else if (command === 'channels' || command === 'c') { 
+    /*
+    let servers = [];
+    client.guilds.cache.forEach(server => {
+      servers.push(server);
+    });
+    */
   } else if (command === 'message' || command === 'msg' || command === 'm') { 
   }
 
