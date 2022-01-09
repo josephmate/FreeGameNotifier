@@ -6,7 +6,8 @@ require('dotenv').config();
 
 function usage() {
   console.log('node main.js help|h');
-  console.log('             channels|c [server]');
+  console.log('             servers|s|guilds|g');
+  console.log('             channels|c');
   console.log('             message|msg|m <channel> <msg>');
 }
 
@@ -25,6 +26,8 @@ if (process.argv.length < 3) {
 const command = process.argv[2];
 if (command !== 'servers'
   && command !== 's'
+  && command !== 'guilds'
+  && command !== 'g'
   && command !== 'channels'
   && command !== 'c'
   && command !== 'message'
@@ -46,7 +49,12 @@ const client = new discord.Client({
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   
-  if (command === 'servers' || command === 's') {
+  if (
+       command === 'servers'
+    || command === 's'
+    || command === 'guilds'
+    || command === 'g'
+  ) {
     let servers = [];
     client.guilds.cache.forEach(server => {
       servers.push(server);
@@ -66,12 +74,46 @@ client.on('ready', () => {
       }
     });
   } else if (command === 'channels' || command === 'c') { 
-    /*
-    let servers = [];
-    client.guilds.cache.forEach(server => {
-      servers.push(server);
+    let channels = [];
+    client.channels.cache.forEach(channel => {
+      if (channel.type === "GUILD_TEXT") {
+        channels.push({
+          channelId: channel.id,
+          channelName: channel.name,
+          serverName: channel.guild.name,
+        });
+      }
     });
-    */
+
+    channels.sort((first, second) => {
+      if (first.serverName < second.serverName) {
+        return -1;
+      } else if (first.serverName > second.serverName) {
+        return 1;
+      } else if (first.channelName < second.serverName) {
+        return -1;
+      } else if (first.channelName > second.serverName) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    let maxServerLength = 0;
+    let maxChannelLength = 0;
+    channels.forEach(channel => {
+      if (channel.serverName.length > maxServerLength) {
+        maxServerLength = channel.serverName.length;
+      }
+      if (channel.channelName.length > maxChannelLength) {
+        maxChannelLength = channel.channelName.length;
+      }
+    });
+
+
+    channels.forEach(channel => {
+      console.log(`${channel.serverName} ${spaces(maxServerLength-channel.serverName.length)} ${channel.channelName} ${spaces(maxChannelLength-channel.channelName.length)} ${channel.channelId}`);
+    });
   } else if (command === 'message' || command === 'msg' || command === 'm') { 
   }
 
