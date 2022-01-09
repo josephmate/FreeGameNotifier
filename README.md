@@ -1,6 +1,50 @@
 # FreeGameNotifier
 Notifies Discord Channels of Free Games from Epic Games Store, hosted on ???
 
+# Running Locally
+
+Setup:
+```
+cp load_secrets_template.sh load_secrets.sh
+# fill in the secrets
+vim load_secrets.sh
+# run
+. ./load_secrets.sh
+node main.js
+```
+
+# Troubleshooting
+You probably did not set the intents properly when you instantiated the discord
+client.
+```
+TypeError [CLIENT_MISSING_INTENTS]: Valid intents must be provided for the Client.
+    at Client._validateOptions (/Users/joseph/projects/FreeGameNotifier/node_modules/discord.js/src/client/Client.js:548:13)
+    at new Client (/Users/joseph/projects/FreeGameNotifier/node_modules/discord.js/src/client/Client.js:76:10)
+    at Object.<anonymous> (/Users/joseph/projects/FreeGameNotifier/main.js:9:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)
+    at node:internal/main/run_main_module:17:47 {
+```
+
+Something is wrong with your token:
+```
+/Users/joseph/projects/FreeGameNotifier/node_modules/discord.js/src/client/Client.js:237
+    if (!token || typeof token !== 'string') throw new Error('TOKEN_INVALID');
+                                                   ^
+
+Error [TOKEN_INVALID]: An invalid token was provided.
+    at Client.login (/Users/joseph/projects/FreeGameNotifier/node_modules/discord.js/src/client/Client.js:237:52)
+    at Object.<anonymous> (/Users/joseph/projects/FreeGameNotifier/main.js:17:8)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:79:12)
+    at node:internal/main/run_main_module:17:47 {
+```
 
 # Hosting
 

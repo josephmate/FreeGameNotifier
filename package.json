@@ -1,0 +1,45 @@
+{
+  "name": "freegamenotifier",
+  "version": "1.0.0",
+  "description": "Notifies Discord Channels of Free Games from Epic Games Store, hosted on ???",
+  "main": "main.js",
+  "dependencies": {
+    "asynckit": "^0.4.0",
+    "axios": "^0.24.0",
+    "combined-stream": "^1.0.8",
+    "delayed-stream": "^1.0.0",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.5.1",
+    "dotenv": "^10.0.0",
+    "follow-redirects": "^1.14.6",
+    "form-data": "^4.0.0",
+    "mime-db": "^1.51.0",
+    "mime-types": "^2.1.34",
+    "node-fetch": "^2.6.6",
+    "tr46": "^0.0.3",
+    "ts-mixer": "^6.0.0",
+    "tslib": "^2.3.1",
+    "webidl-conversions": "^3.0.1",
+    "whatwg-url": "^5.0.0",
+    "ws": "^8.4.0",
+    "zod": "^3.11.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephmate/FreeGameNotifier.git"
+  },
+  "keywords": [
+    "freegames",
+    "bot",
+    "discord"
+  ],
+  "author": "Joseph Mate",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/josephmate/FreeGameNotifier/issues"
+  },
+  "homepage": "https://github.com/josephmate/FreeGameNotifier#readme"
+}
