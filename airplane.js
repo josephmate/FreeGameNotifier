@@ -1,12 +1,14 @@
 // Linked to https://app.airplane.dev/t/freegamenotifierbot [do not edit this line]
 
-const freeGameNotifierBot = require('./free-game-notifier-bot.js');
+require('dotenv').config();
+const freeGameNotifierBot = require('./free-game-notifier-bot');
 
 /**
  * airplane.dev will invoke this function.
  */
 export default async function(params) {
-  freeGameNotifierBot.run(params);
-  return [
-  ];
+  return await freeGameNotifierBot.run(
+    process.env.DISCORD_BOT_SECRET,
+    params["channel_ids"].split(','),
+  );
 }

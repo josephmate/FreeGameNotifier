@@ -11,6 +11,17 @@ vim load_secrets.sh
 # run
 . ./load_secrets.sh
 node main.js
+
+
+```
+
+Testing:
+```
+node main.js free-game-notifier 929843391859163166
+node main.js free-game-notifier 929843391859163166,929942967605669940
+
+airplane dev ./airplane.js -- --channel_ids 929843391859163166
+airplane dev ./airplane.js -- --channel_ids 929843391859163166,929942967605669940
 ```
 
 # Troubleshooting

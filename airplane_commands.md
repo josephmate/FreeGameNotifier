@@ -1,11 +1,15 @@
 Testing:
 ```
-airplane dev ./airplane.js ./free-game-notifier-bot.js ./package.json
+airplane dev ./airplane.js -- --channel_ids 929843391859163166
+airplane dev ./airplane.js -- --channel_ids 929843391859163166,929942967605669940
+
 ```
 
 Deploying
 ```
 airplane deploy ./airplane.js ./free-game-notifier-bot.js ./package.json
+
+airplane deploy ./
 ```
 
 Installing:
