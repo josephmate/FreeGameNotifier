@@ -32,7 +32,7 @@ const runImpl = async function (
   client.channels.cache.forEach(channel => {
     if (channelIdSet.has(channel.id)) {
       console.log(`Sending to ${channel.id}`);
-      promises.push(channel.send("Test message.")
+      promises.push(channel.send("Remember to checkout https://www.epicgames.com/store/ for this week's free game.")
         .then( (v) => sentChannelIdSet.add(channel.id))
         .catch( (err) => console.log(`Failed to send message to ${channel.id} due to ${err}`))
       );
