@@ -24,6 +24,63 @@ airplane dev ./airplane.js -- --channel_ids 929843391859163166
 airplane dev ./airplane.js -- --channel_ids 929843391859163166,929942967605669940
 ```
 
+# Epic Store Free Game Payload
+```
+curl 'https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=CA&allowCountries=CA' | jq . 
+{
+  "data": {
+    "Catalog": {
+      "searchStore": {
+        "elements": [
+          {
+            "title": "Offworld Trading Company",
+            ...
+            "urlSlug": "offworld-trading-company",
+            ...
+            "promotions": null
+          },
+          .
+          .
+          .
+          {
+            "title": "Gods Will Fall",
+            ...
+            "urlSlug": "gods-will-fall",
+            ...
+            "promotions": {
+              "promotionalOffers": [
+                {
+                  "promotionalOffers": [
+                    {
+                      "startDate": "2022-01-06T16:00:00.000Z",
+                      "endDate": "2022-01-13T16:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE",
+                        "discountPercentage": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "upcomingPromotionalOffers": []
+            }
+          },
+          .
+          .
+          .
+
+```
+
+1. response contains multiple promotions
+2. entries with promotions: null can be ignored
+3. one entry with promotion.promotionalOffers[0].promotionalOffers[0].startDate
+   in the past is the free game (maybe multiple)
+4. https://www.epicgames.com/store/p/<urlSlug> is the url
+5. one entry with promotion.promotionalOffers[0].promotionalOffers[0].startDate
+   in the future is next week's free game
+
+https://www.epicgames.com/store/p/gods-will-fall
+
 # Troubleshooting
 You probably did not set the intents properly when you instantiated the discord
 client.
