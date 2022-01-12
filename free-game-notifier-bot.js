@@ -1,4 +1,5 @@
 const discord = require('discord.js');
+const getFreeEpicGames = require('./get-free-epic-games');
 
 function connect(discordClientSecret) {
   const client = new discord.Client({
@@ -26,13 +27,16 @@ const runImpl = async function (
     channelIdSet.add(channelId);
   });
   const sentChannelIdSet = new Set();
-  let client = await connect(discordClientSecret);
+  let clientPromise = connect(discordClientSecret);
+  let msgPromise = getFreeEpicGames.get();
+  let client = await clientPromise;
+  let msg = await msgPromise;
   console.log(`Logged in as ${client.user.tag}!`);
   let promises = []
   client.channels.cache.forEach(channel => {
     if (channelIdSet.has(channel.id)) {
       console.log(`Sending to ${channel.id}`);
-      promises.push(channel.send("Remember to checkout https://www.epicgames.com/store/ for this week's free game.")
+      promises.push(channel.send(msg)
         .then( (v) => sentChannelIdSet.add(channel.id))
         .catch( (err) => console.log(`Failed to send message to ${channel.id} due to ${err}`))
       );
