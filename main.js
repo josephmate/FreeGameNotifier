@@ -10,6 +10,7 @@ function usage() {
   console.log('             channels|c');
   console.log('             message|msg|m <channel id> <msg>');
   console.log('             free-game-notifier|free <channel ids csv>');
+  console.log('             get-free-epic-games|get');
 }
 
 function spaces(numSpaces) {
@@ -36,6 +37,8 @@ if (command !== 'servers'
   && command !== 'm'
   && command !== 'free-game-notifier'
   && command !== 'free'
+  && command !== 'get-free-epic-games'
+  && command !== 'get'
 ) {
   usage();
   return -1;
@@ -71,6 +74,13 @@ if (command === 'free-game-notifier'
     process.env.DISCORD_BOT_SECRET,
     process.argv[3].split(',')
   ).then(v => console.log(`bot ran with exit code ${v}`));
+} else if (command === 'get-free-epic-games'
+  || command === 'get'
+) {
+  const discord = require('discord.js');
+  const getFreeEpicGames = require('./get-free-epic-games');
+  getFreeEpicGames.get()
+    .then(msg => console.log(msg));
 } else {
   const discord = require('discord.js');
   const client = new discord.Client({

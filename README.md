@@ -68,6 +68,23 @@ curl 'https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotion
           .
           .
           .
+            "promotions": {
+              "promotionalOffers": [],
+              "upcomingPromotionalOffers": [
+                {
+                  "promotionalOffers": [
+                    {
+                      "startDate": "2022-01-13T16:00:00.000Z",
+                      "endDate": "2022-01-20T16:00:00.000Z",
+                      "discountSetting": {
+                        "discountType": "PERCENTAGE",
+                        "discountPercentage": 0
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
 
 ```
 
