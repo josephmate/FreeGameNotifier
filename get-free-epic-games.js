@@ -25,7 +25,7 @@ const parseFreeGames = function(response) {
       && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
       && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
     ) {
-      currentFreeGames.push({
+      nextWeekFreeGames.push({
         title: game.title,
         url: `https://www.epicgames.com/store/p/${game.productSlug}`
       });
