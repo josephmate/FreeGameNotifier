@@ -1,0 +1,125 @@
+{
+    "data": {
+        "data": {
+            "Catalog": {
+                "searchStore": {
+                    "elements": [
+                        {
+                            "title": "Test Game 1",
+                            "id": "abcd1234",
+                            "productSlug": "product-slug",
+                            "urlSlug": "url-slug",
+                            "url": "url",
+                            "catalogNs": {
+                                "mappings": [
+                                    {
+                                        "pageSlug": "page-slug",
+                                        "pageType": "productHome"
+                                    }
+                                ]
+                            },
+                            "promotions": {
+                                "promotionalOffers":[
+                                    {
+                                       "promotionalOffers":[
+                                          {
+                                             "startDate":"2022-05-05T15:00:00.000Z",
+                                             "endDate":"2022-05-12T15:00:00.000Z",
+                                             "discountSetting":{
+                                                "discountType":"PERCENTAGE",
+                                                "discountPercentage":0
+                                             }
+                                          }
+                                       ]
+                                    }
+                                 ]
+                            }
+                        },
+                        {
+                            "title": "Null pageSlug",
+                            "id": "aaaa1111",
+                            "productSlug": "null-product-slug",
+                            "urlSlug": "null-url-slug",
+                            "url": "null-url",
+                            "catalogNs": {
+                                "mappings": [
+                                    {
+                                        "pageSlug": null,
+                                        "pageType": "productHome"
+                                    }
+                                ]
+                            },
+                            "promotions": {
+                                "promotionalOffers":[
+                                    {
+                                       "promotionalOffers":[
+                                          {
+                                             "startDate":"2022-05-05T15:00:00.000Z",
+                                             "endDate":"2022-05-12T15:00:00.000Z",
+                                             "discountSetting":{
+                                                "discountType":"PERCENTAGE",
+                                                "discountPercentage":0
+                                             }
+                                          }
+                                       ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "title": "Null string",
+                            "productSlug": "null-string-product-slug",
+                            "urlSlug": "null-string-url-slug",
+                            "url": "null-url",
+                            "catalogNs": {
+                                "mappings": [
+                                    {
+                                        "pageSlug": "null",
+                                        "pageType": "productHome"
+                                    }
+                                ]
+                            },
+                            "promotions": {
+                                "promotionalOffers":[
+                                    {
+                                       "promotionalOffers":[
+                                          {
+                                             "startDate":"2022-05-05T15:00:00.000Z",
+                                             "endDate":"2022-05-12T15:00:00.000Z",
+                                             "discountSetting":{
+                                                "discountType":"PERCENTAGE",
+                                                "discountPercentage":0
+                                             }
+                                          }
+                                       ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "title": "Missing catalogNs",
+                            "productSlug": "missing-product-slug",
+                            "urlSlug": "missing-url-slug",
+                            "promotions": {
+                                "promotionalOffers":[
+                                    {
+                                       "promotionalOffers":[
+                                          {
+                                             "startDate":"2022-05-05T15:00:00.000Z",
+                                             "endDate":"2022-05-12T15:00:00.000Z",
+                                             "discountSetting":{
+                                                "discountType":"PERCENTAGE",
+                                                "discountPercentage":0
+                                             }
+                                          }
+                                       ]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

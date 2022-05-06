@@ -7,6 +7,21 @@ const parseFreeGames = function(response) {
   let nextWeekFreeGames = [];
   console.log(JSON.stringify(response.data));
   response.data.data.Catalog.searchStore.elements.forEach(game => {
+    let slug = null
+
+    try {
+      slug = game.catalogNs.mappings[0].pageSlug
+      
+      // fallback to old implementation if this fails
+      if (!slug || slug == "null") {
+        slug = game.productSlug
+      }
+
+    } catch(e) {
+      slug = game.productSlug
+    }
+
+    let url = `https://www.epicgames.com/store/p/${slug}`
     if(game.promotions
       && game.promotions.promotionalOffers
       && game.promotions.promotionalOffers.length > 0
@@ -16,7 +31,7 @@ const parseFreeGames = function(response) {
     ) {
       currentFreeGames.push({
         title: game.title,
-        url: `https://www.epicgames.com/store/p/${game.productSlug}`
+        url: url
       });
     } else if(game.promotions
       && game.promotions.upcomingPromotionalOffers
@@ -27,7 +42,7 @@ const parseFreeGames = function(response) {
     ) {
       nextWeekFreeGames.push({
         title: game.title,
-        url: `https://www.epicgames.com/store/p/${game.productSlug}`
+        url: url
       });
     }
   });
@@ -64,4 +79,5 @@ const getImpl = async function (
 
 module.exports = {
   get: getImpl,
+  parseFreeGames: parseFreeGames
 };
