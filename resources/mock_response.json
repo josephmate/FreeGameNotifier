@@ -122,8 +122,8 @@
                             "productSlug": "[]",
                             "urlSlug": null,
                             "seller":{
-                                "id":"o-ufmrk5furrrxgsp5tdngefzt5rxdcn",
-                                "name":"Epic Dev Test Account"
+                                "id": "o-ufmrk5furrrxgsp5tdngefzt5rxdcn",
+                                "name": "Epic Dev Test Account"
                              },
                             "catalogNs":{
                                 "mappings":[
