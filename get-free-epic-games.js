@@ -87,7 +87,7 @@ const isVaultedGame = function(game) {
   let seller = game.seller
 
   if (seller) {
-    return seller.id == "o-ufmrk5furrrxgsp5tdngefzt5rxdcn" || seller.name == "Epic Dev Test Account"
+    return seller.id == epicDevTestAcct.id || seller.name == epicDevTestAcct.name
   }
 
   let categories = game.categories
