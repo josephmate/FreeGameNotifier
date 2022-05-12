@@ -116,6 +116,76 @@
                                     }
                                 ]
                             }
+                        },
+                        {
+                            "title": "Vaulted game 1 - dev test seller",
+                            "productSlug": "[]",
+                            "urlSlug": null,
+                            "seller":{
+                                "id":"o-ufmrk5furrrxgsp5tdngefzt5rxdcn",
+                                "name":"Epic Dev Test Account"
+                             },
+                            "catalogNs":{
+                                "mappings":[
+                                   
+                                ]
+                             },
+                            "promotions": {
+                                "promotionalOffers":[
+                                    {
+                                       "promotionalOffers":[
+                                          {
+                                             "startDate":"2022-05-05T15:00:00.000Z",
+                                             "endDate":"2022-05-12T15:00:00.000Z",
+                                             "discountSetting":{
+                                                "discountType":"PERCENTAGE",
+                                                "discountPercentage":0
+                                             }
+                                          }
+                                       ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "title": "Vaulted game 2 - vaulted category",
+                            "productSlug": "[]",
+                            "urlSlug": null,
+                            "categories":[
+                                {
+                                   "path":"freegames/vaulted"
+                                },
+                                {
+                                   "path":"freegames"
+                                },
+                                {
+                                   "path":"games"
+                                },
+                                {
+                                   "path":"applications"
+                                }
+                             ],
+                            "catalogNs":{
+                                "mappings":[
+                                   
+                                ]
+                             },
+                            "promotions": {
+                                "promotionalOffers":[
+                                    {
+                                       "promotionalOffers":[
+                                          {
+                                             "startDate":"2022-05-05T15:00:00.000Z",
+                                             "endDate":"2022-05-12T15:00:00.000Z",
+                                             "discountSetting":{
+                                                "discountType":"PERCENTAGE",
+                                                "discountPercentage":0
+                                             }
+                                          }
+                                       ]
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
