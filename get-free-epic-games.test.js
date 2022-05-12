@@ -72,6 +72,7 @@ describe('isVaultedGame', () => {
 
         expect(epic.isVaultedGame(testName)).toBe(true)
         expect(epic.isVaultedGame(testId)).toBe(true)
+        expect(epic.isVaultedGame(vaultedGame1)).toBe(true)
     })
 
     test('should return true when category contains vaulted', () => {
@@ -87,7 +88,6 @@ describe('isVaultedGame', () => {
         }
 
         expect(epic.isVaultedGame(testGame)).toBe(true)
-        expect(epic.isVaultedGame(vaultedGame1)).toBe(true)
         expect(epic.isVaultedGame(vaultedGame2)).toBe(true)
     })
 
