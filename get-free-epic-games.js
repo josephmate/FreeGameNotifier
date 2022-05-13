@@ -1,5 +1,9 @@
 const axios = require('axios');
 const freeGameUrl = "https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=CA&allowCountries=CA";
+const epicDevTestAcct = {
+  id: "o-ufmrk5furrrxgsp5tdngefzt5rxdcn",
+  name: "Epic Dev Test Account"
+};
 
 const parseFreeGames = function(response) {
   var currentDate = new Date(); 
@@ -7,43 +11,45 @@ const parseFreeGames = function(response) {
   let nextWeekFreeGames = [];
   console.log(JSON.stringify(response.data));
   response.data.data.Catalog.searchStore.elements.forEach(game => {
-    let slug = null
+    if (!isVaultedGame(game)) {
+      let slug = null
 
-    try {
-      slug = game.catalogNs.mappings[0].pageSlug
-      
-      // fallback to old implementation if this fails
-      if (!slug || slug == "null") {
+      try {
+        slug = game.catalogNs.mappings[0].pageSlug
+
+        // fallback to old implementation if this fails
+        if (!slug || slug == "null") {
+          slug = game.productSlug
+        }
+  
+      } catch(e) {
         slug = game.productSlug
       }
 
-    } catch(e) {
-      slug = game.productSlug
-    }
-
-    let url = `https://www.epicgames.com/store/p/${slug}`
-    if(game.promotions
-      && game.promotions.promotionalOffers
-      && game.promotions.promotionalOffers.length > 0
-      && game.promotions.promotionalOffers[0].promotionalOffers.length > 0
-      && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
-      && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
-    ) {
-      currentFreeGames.push({
-        title: game.title,
-        url: url
-      });
-    } else if(game.promotions
-      && game.promotions.upcomingPromotionalOffers
-      && game.promotions.upcomingPromotionalOffers.length > 0
-      && game.promotions.upcomingPromotionalOffers[0].promotionalOffers.length > 0
-      && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
-      && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
-    ) {
-      nextWeekFreeGames.push({
-        title: game.title,
-        url: url
-      });
+      let url = `https://www.epicgames.com/store/p/${slug}`
+      if(game.promotions
+        && game.promotions.promotionalOffers
+        && game.promotions.promotionalOffers.length > 0
+        && game.promotions.promotionalOffers[0].promotionalOffers.length > 0
+        && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
+        && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
+      ) {
+        currentFreeGames.push({
+          title: game.title,
+          url: url
+        });
+      } else if(game.promotions
+        && game.promotions.upcomingPromotionalOffers
+        && game.promotions.upcomingPromotionalOffers.length > 0
+        && game.promotions.upcomingPromotionalOffers[0].promotionalOffers.length > 0
+        && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
+        && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
+      ) {
+        nextWeekFreeGames.push({
+          title: game.title,
+          url: url
+        });
+      }
     }
   });
 
@@ -77,7 +83,32 @@ const getImpl = async function (
 
 }
 
+const isVaultedGame = function(game) {
+  let seller = game.seller
+
+  if (seller) {
+    return seller.id == epicDevTestAcct.id || seller.name == epicDevTestAcct.name
+  }
+
+  let categories = game.categories
+
+  // tertiary var since js can't return from foreach lol
+  let isVaulted = false
+
+  if (categories) {
+    categories.forEach(category => {
+      if (category.path == "freegames/vaulted") {
+        isVaulted = true
+      }
+    })
+  }
+
+  return isVaulted
+}
+
 module.exports = {
   get: getImpl,
-  parseFreeGames: parseFreeGames
+  parseFreeGames: parseFreeGames,
+  epicDevTestAcct: epicDevTestAcct,
+  isVaultedGame: isVaultedGame
 };

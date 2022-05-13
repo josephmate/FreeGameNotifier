@@ -4,8 +4,11 @@ const sampleFile = require('./resources/sample.json')
 
 let games = mockFile.data.data.Catalog.searchStore.elements
 let freeGame = games[0]
-let nullGame = games[1]
-let missingGame = games[2]
+let nullGame1 = games[1]
+let nullGame2 = games[2]
+let missingGame = games[3]
+let vaultedGame1 = games[4]
+let vaultedGame2 = games[5]
 
 let output = ""
 let outputArr = []
@@ -17,10 +20,10 @@ beforeEach(()=> {
 
 describe("Epic Games", ()=> {
     test('should generate correct URL for sample data', ()=> {
-        let expectedString = "FREE: Terraforming Mars at https://www.epicgames.com/store/p/terraforming-mars-18c3ad"
-
         let sampleOutput = epic.parseFreeGames(sampleFile)
         let sampleArr = sampleOutput.split("\n")
+
+        let expectedString = `FREE: Jotun: Valhalla Edition at https://www.epicgames.com/store/p/jotun`
         expect(sampleArr[0]).toBe(expectedString)
     })
 
@@ -30,12 +33,67 @@ describe("Epic Games", ()=> {
     })
 
     test('should handle null page slug', ()=> {
-        const expectedNullString = `FREE: ${nullGame.title} at https://www.epicgames.com/store/p/${nullGame.productSlug}`
+        const expectedNullString = `FREE: ${nullGame1.title} at https://www.epicgames.com/store/p/${nullGame1.productSlug}`
         expect(outputArr[1]).toBe(expectedNullString)
+    })
+
+    test('should handle null string as null', () => {
+        const expectedNullString = `FREE: ${nullGame2.title} at https://www.epicgames.com/store/p/${nullGame2.productSlug}`
+        expect(outputArr[2]).toBe(expectedNullString)
     })
 
     test('should handle missing catalogNs', () => {
         const expectedString = `FREE: ${missingGame.title} at https://www.epicgames.com/store/p/${missingGame.productSlug}`
-        expect(outputArr[2]).toBe(expectedString)
+        expect(outputArr[3]).toBe(expectedString)
+    })
+
+    test('should handle vaulted games', ()=> {
+        console.log(JSON.stringify(outputArr))
+        expect(outputArr.length == 4)
+    })
+})
+
+describe('isVaultedGame', () => {
+    test('should return true when seller is dev account', () => {
+        let testName = {
+            "title": "test-game",
+            "seller": {
+                "id": "someId",
+                "name": epic.epicDevTestAcct.name
+            }
+        }
+        let testId = {
+            title: "test-game",
+            seller: {
+                id: epic.epicDevTestAcct.id,
+                name: "some-name"
+            }
+        }
+
+        expect(epic.isVaultedGame(testName)).toBe(true)
+        expect(epic.isVaultedGame(testId)).toBe(true)
+        expect(epic.isVaultedGame(vaultedGame1)).toBe(true)
+    })
+
+    test('should return true when category contains vaulted', () => {
+        let testGame = {
+            categories: [
+                {
+                    path: "some path"
+                },
+                {
+                    path: "freegames/vaulted"
+                }
+            ]
+        }
+
+        expect(epic.isVaultedGame(testGame)).toBe(true)
+        expect(epic.isVaultedGame(vaultedGame2)).toBe(true)
+    })
+
+    test('should return false for other mocked games', () => {
+        for (i = 0; i < 4; i++) {
+            expect(epic.isVaultedGame(games[i])).toBe(false)
+        }4
     })
 })
