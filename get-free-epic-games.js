@@ -56,13 +56,13 @@ const parseFreeGames = function(response) {
   let message = "";
   if (currentFreeGames.length > 0) {
     currentFreeGames.forEach(game => {
-      message += `FREE: ${game.title} at ${game.url}\n`;
+      message += `FREE: ${game.title} at <${game.url}>\n`;
     });
   } else {
     message += "Remember to checkout https://www.epicgames.com/store/ for this week's free game.\n";
   }
   nextWeekFreeGames.forEach(game => {
-    message += `Next week: ${game.title} at ${game.url}\n`;
+    message += `Next week: ${game.title} at <${game.url}>\n`;
   });
 
   return message;

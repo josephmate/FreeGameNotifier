@@ -23,27 +23,27 @@ describe("Epic Games", ()=> {
         let sampleOutput = epic.parseFreeGames(sampleFile)
         let sampleArr = sampleOutput.split("\n")
 
-        let expectedString = `FREE: Jotun: Valhalla Edition at https://www.epicgames.com/store/p/jotun`
+        let expectedString = `FREE: Jotun: Valhalla Edition at <https://www.epicgames.com/store/p/jotun>`
         expect(sampleArr[0]).toBe(expectedString)
     })
 
     test('should generate correct URL for mocked data', ()=> {
-        const expectedFreeString = `FREE: ${freeGame.title} at https://www.epicgames.com/store/p/${freeGame.catalogNs.mappings[0].pageSlug}`
+        const expectedFreeString = `FREE: ${freeGame.title} at <https://www.epicgames.com/store/p/${freeGame.catalogNs.mappings[0].pageSlug}>`
         expect(outputArr[0]).toBe(expectedFreeString)
     })
 
     test('should handle null page slug', ()=> {
-        const expectedNullString = `FREE: ${nullGame1.title} at https://www.epicgames.com/store/p/${nullGame1.productSlug}`
+        const expectedNullString = `FREE: ${nullGame1.title} at <https://www.epicgames.com/store/p/${nullGame1.productSlug}>`
         expect(outputArr[1]).toBe(expectedNullString)
     })
 
     test('should handle null string as null', () => {
-        const expectedNullString = `FREE: ${nullGame2.title} at https://www.epicgames.com/store/p/${nullGame2.productSlug}`
+        const expectedNullString = `FREE: ${nullGame2.title} at <https://www.epicgames.com/store/p/${nullGame2.productSlug}>`
         expect(outputArr[2]).toBe(expectedNullString)
     })
 
     test('should handle missing catalogNs', () => {
-        const expectedString = `FREE: ${missingGame.title} at https://www.epicgames.com/store/p/${missingGame.productSlug}`
+        const expectedString = `FREE: ${missingGame.title} at <https://www.epicgames.com/store/p/${missingGame.productSlug}>`
         expect(outputArr[3]).toBe(expectedString)
     })
 
