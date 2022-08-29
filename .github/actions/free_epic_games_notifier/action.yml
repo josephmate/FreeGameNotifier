@@ -1,0 +1,8 @@
+# https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action
+name: 'Free Epic Games Notifier Action'
+description: 'Gets the current and next weeks free games and posts it to discord'
+inputs:
+outputs:
+runs:
+  using: 'node16'
+  main: 'index.js'
