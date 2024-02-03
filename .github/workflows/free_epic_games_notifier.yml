@@ -5,24 +5,30 @@ on:
     # make sure to change to:
     #  in the spring: 5 18 * * 4
     #  in the fall:   5 19 * * 4
-    - cron: 5 18 * * 4
+    - cron: 5 19 * * 4
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  free_game_notifier:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    env:
+      DISCORD_BOT_SECRET: ${{ secrets.DISCORD_BOT_SECRET }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-using-an-action-in-the-same-repository-as-the-workflow
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         # runs the free_epic_games_notifier.yml action
-      - name: Use local my-action
-        uses: ./.github/actions/free_epic_games_notifier/action.yml
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - run: npm install
+      - run: node main.js free-game-notifier ${{ secrets.DISCORD_CHANNEL_IDS }}
