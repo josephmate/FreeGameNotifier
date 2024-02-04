@@ -1,5 +1,5 @@
 # FreeGameNotifier
-Notifies Discord Channels of Free Games from Epic Games Store, hosted on ???
+Notifies Discord Channels of Free Games from Epic Games Store, hosted on github actions. It runs every Thursday 11am EST.
 
 # Running Locally
 
@@ -11,17 +11,12 @@ vim load_secrets.sh
 # run
 . ./load_secrets.sh
 node main.js
-
-
 ```
 
 Testing:
 ```
 node main.js free-game-notifier 929843391859163166
 node main.js free-game-notifier 929843391859163166,929942967605669940
-
-airplane dev ./airplane.js -- --channel_ids 929843391859163166
-airplane dev ./airplane.js -- --channel_ids 929843391859163166,929942967605669940
 ```
 
 # Epic Store Free Game Payload

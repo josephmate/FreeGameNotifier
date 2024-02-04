@@ -1,7 +1,4 @@
 
-// Runs the bot from the command line.
-// airplane.js runs the bot from airplane.dev
-
 require('dotenv').config();
 
 function usage() {

@@ -106,5 +106,3 @@ dist
 
 load_secrets.sh
 private/
-airplane.env
-.airplane/
