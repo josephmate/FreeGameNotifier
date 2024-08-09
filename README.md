@@ -1,5 +1,5 @@
 # FreeGameNotifier
-Notifies Discord Channels of Free Games from Epic Games Store, hosted on github actions. It runs every Thursday 11am EST.
+Notifies Discord Channels of Free Games from Epic Games Store, hosted on github actions. It runs every Thursday 19:00 UTC (12PM EST in the fall, spring EST in the fall).
 
 # Running Locally
 
