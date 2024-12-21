@@ -11,45 +11,43 @@ const parseFreeGames = function(response) {
   let nextWeekFreeGames = [];
   console.log(JSON.stringify(response.data));
   response.data.data.Catalog.searchStore.elements.forEach(game => {
-    if (!isVaultedGame(game)) {
-      let slug = null
+    let slug = null
 
-      try {
-        slug = game.catalogNs.mappings[0].pageSlug
+    try {
+      slug = game.catalogNs.mappings[0].pageSlug
 
-        // fallback to old implementation if this fails
-        if (!slug || slug == "null") {
-          slug = game.productSlug
-        }
-  
-      } catch(e) {
+      // fallback to old implementation if this fails
+      if (!slug || slug == "null") {
         slug = game.productSlug
       }
 
-      let url = `https://www.epicgames.com/store/p/${slug}`
-      if(game.promotions
-        && game.promotions.promotionalOffers
-        && game.promotions.promotionalOffers.length > 0
-        && game.promotions.promotionalOffers[0].promotionalOffers.length > 0
-        && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
-        && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
-      ) {
-        currentFreeGames.push({
-          title: game.title,
-          url: url
-        });
-      } else if(game.promotions
-        && game.promotions.upcomingPromotionalOffers
-        && game.promotions.upcomingPromotionalOffers.length > 0
-        && game.promotions.upcomingPromotionalOffers[0].promotionalOffers.length > 0
-        && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
-        && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
-      ) {
-        nextWeekFreeGames.push({
-          title: game.title,
-          url: url
-        });
-      }
+    } catch(e) {
+      slug = game.productSlug
+    }
+
+    let url = `https://www.epicgames.com/store/p/${slug}`
+    if(game.promotions
+      && game.promotions.promotionalOffers
+      && game.promotions.promotionalOffers.length > 0
+      && game.promotions.promotionalOffers[0].promotionalOffers.length > 0
+      && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
+      && game.promotions.promotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
+    ) {
+      currentFreeGames.push({
+        title: game.title,
+        url: url
+      });
+    } else if(game.promotions
+      && game.promotions.upcomingPromotionalOffers
+      && game.promotions.upcomingPromotionalOffers.length > 0
+      && game.promotions.upcomingPromotionalOffers[0].promotionalOffers.length > 0
+      && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountType == "PERCENTAGE"
+      && game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].discountSetting.discountPercentage == 0
+    ) {
+      nextWeekFreeGames.push({
+        title: game.title,
+        url: url
+      });
     }
   });
 
@@ -62,7 +60,11 @@ const parseFreeGames = function(response) {
     message += "Remember to checkout https://www.epicgames.com/store/ for this week's free game.\n";
   }
   nextWeekFreeGames.forEach(game => {
-    message += `Next week: ${game.title} at <${game.url}>\n`;
+    if (game.title.startsWith("Mystery Game ")) {
+      message += `Comeback tomorrow for: ${game.title}\n`;
+    } else {
+      message += `Next week: ${game.title} at <${game.url}>\n`;
+    }
   });
 
   return message;
